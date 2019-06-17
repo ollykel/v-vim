@@ -17,10 +17,11 @@ echo "Installing v-vim in $VIMDIR:" >&2
 cp ./syntax/vlang.vim $VIMDIR/syntax
 echo $'...\tvlang.vim copied to ' "$VIMDIR/syntax" >&2
 
-if [[ -f $VIMDIR/filetype.vim ]]; then
-	COUNT=$(grep --count 'setf vlang' $VIMDIR/filetype.vim)
+FNAME=filetype.vim
+if [[ -f $VIMDIR/$FNAME ]]; then
+	COUNT=$(grep --count 'setf vlang' $VIMDIR/$FNAME)
 	if [[ $COUNT -ge 1 ]]; then
-		echo $'...\tv already installed in ' "$VIMDIR/filetype.vim" >&2
+		echo $'...\tv already installed in ' "$VIMDIR/$FNAME" >&2
 	else
 		SRCH=$'augroup\s\s*filetypedetect'
 		ADD=$'\tau BufNewFile,BufRead *.v,*.vh\tsetf vlang'
@@ -28,27 +29,32 @@ if [[ -f $VIMDIR/filetype.vim ]]; then
 		OUTPUT=''
 		OLDIFS=$IFS
 		IFS=$'\n'
-		FILE=$(cat $VIMDIR/filetype.vim)
+		FILE=$(cat $VIMDIR/$FNAME)
+		HAS_APPENDED='F'
 		for LN in $FILE; do
-			echo "LN: $LN" >&2
 			OUTPUT+="$LN"
 			OUTPUT+=$'\n'
-			if [[ $(echo "$LN" | grep -c "$SRCH") -ne 0 ]]; then
+			if [[ $(echo "$LN" | grep -c "$SRCH") -ne 0 ]] && [[ $HAS_APPENDED = 'F' ]]; then
 				OUTPUT+="$ADD"
 				OUTPUT+=$'\n'
+				HAS_APPENDED='T'
 			fi
 		done
-		echo $'Output:\n' "$OUTPUT" >&2
-		mv $VIMDIR/filetype.vim $VIMDIR/filetype.vim.old
-		echo "$OUTPUT" > $VIMDIR/filetype.vim
-		echo $'...\tv installed in ' "$VIMDIR/filetype.vim" >&2
+		if [[ $HAS_APPENDED = 'F' ]]; then
+			echo $'\x1b[31m"augroup filetypedetect" not present in '\
+				"$VIMDIR/$FNAME" $'\x1b[0m' >&2
+			return 1
+		fi
+		mv $VIMDIR/$FNAME $VIMDIR/$FNAME.old
+		echo "$OUTPUT" > $VIMDIR/$FNAME
+		echo $'...\tv installed in ' "$VIMDIR/$FNAME" >&2
 		IFS=$OLDIFS
 	fi
 else
-	cp ./filetype.vim $VIMDIR
-	echo $'...\tfiletype.vim installed in ' "$VIMDIR" >&2
+	cp ./$FNAME $VIMDIR
+	echo $'...\t' "$FNAME installed in $VIMDIR" >&2
 fi
 
-echo $'\x1b[32mPlugin successfully copied to' "$VIMDIR" $'\x1b[0m'
+echo $'\x1b[32mPlugin successfully installed in' "$VIMDIR" $'\x1b[0m'
 return 0
 
