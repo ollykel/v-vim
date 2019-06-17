@@ -90,7 +90,7 @@ hi def link    	vComplexes         Type
 syn match      	vDeclaration       /\<fn\>/
 
 " Predefined functions and values
-syn keyword    	vBuiltins          assert cap complex copy delete imag
+syn keyword    	vBuiltins          assert cap complex copy delete eprintln imag
 syn keyword    	vBuiltins          make new panic print println real recover
 syn keyword    	vConstants         iota true false
 
@@ -108,6 +108,8 @@ hi def link    	vTodo              Todo
 
 " Go escapes
 syn match      	vEscapeOctal       display contained "\\[0-7]\{3}"
+syn match       vEscapeVar         display contained "\$[0-9A-Za-z\.]*"
+syn match       vEscapeVar         display contained "\${[^}]*}"
 syn match      	vEscapeC           display contained +\\[abfnrtv\\'"]+
 syn match      	vEscapeX           display contained "\\x\x\{2}"
 syn match      	vEscapeU           display contained "\\u\x\{4}"
@@ -115,6 +117,7 @@ syn match      	vEscapeBigU        display contained "\\U\x\{8}"
 syn match      	vEscapeError       display contained +\\[^0-7xuUabfnrtv\\'"]+
 
 hi def link    	vEscapeOctal      	vSpecialString
+hi def link     vEscapeVar          vSpecialString
 hi def link    	vEscapeC          	vSpecialString
 hi def link    	vEscapeX          	vSpecialString
 hi def link    	vEscapeU          	vSpecialString
@@ -123,7 +126,7 @@ hi def link    	vSpecialString     Special
 hi def link    	vEscapeError       Error
 
 " Strings and their contents
-syn cluster    	vStringGroup       contains=vEscapeOctal,vEscapeC,vEscapeX,vEscapeU,vEscapeBigU,vEscapeError
+syn cluster    	vStringGroup       contains=vEscapeOctal,vEscapeVar,vEscapeC,vEscapeX,vEscapeU,vEscapeBigU,vEscapeError
 syn region     	vString            start=+'+ skip=+\\\\\|\\'+ end=+'+ contains=@vStringGroup
 syn region     	vRawString         start=+`+ end=+`+
 
@@ -131,7 +134,7 @@ hi def link    	vString            String
 hi def link    	vRawString         String
 
 " Characters; their contents
-syn cluster    	vCharacterGroup    contains=vEscapeOctal,vEscapeC,vEscapeX,vEscapeU,vEscapeBigU
+syn cluster    	vCharacterGroup    contains=vEscapeOctal,vEscapeC,vEscapeVar,vEscapeX,vEscapeU,vEscapeBigU
 syn region     	vCharacter         start=+'+ skip=+\\\\\|\\'+ end=+'+ contains=@vCharacterGroup
 
 hi def link    	vCharacter         Character
@@ -183,10 +186,7 @@ endif
 
 " Extra types commonly seen
 if	v_highlight_extra_types != 0
-  syn match	vExtraType /\<bytes\.\(Buffer\)\>/
-  syn match	vExtraType /\<io\.\(Reader\|Writer\|ReadWriter\|ReadWriteCloser\)\>/
-  syn match	vExtraType /\<reflect\.\(Kind\|Type\|Value\)\>/
-  syn match	vExtraType /\<unsafe\.Pointer\>/
+  syn match	vExtraType /\<json\.\(encode\|decode\)\>/
 endif
 
 " Space-tab error
