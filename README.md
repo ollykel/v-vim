@@ -4,6 +4,7 @@ They must be installed in your vim runtimepath to work.
 
 ## Instructions
 These instructions assume that you are using a \*nix-like os.
+**\*\*NEW Jun 16, 2019: "Use install.sh $VIMDIR" to install files**
 1. Choose which directory you wish to use.
 If you wish to install these files for personal use only, use the directory
 $HOME/.vim:
