@@ -90,8 +90,11 @@ hi def link    	vComplexes         Type
 syn match      	vDeclaration       /\<fn\>/
 
 " Predefined functions and values
-syn keyword    	vBuiltins          assert cap complex copy delete eprintln imag
-syn keyword    	vBuiltins          make new panic print println real recover
+syn keyword    	vBuiltins          assert cap complex copy delete exit imag
+syn keyword    	vBuiltins          print println eprint eprintln print_backtrace  
+syn keyword    	vBuiltins          float_calloc ok memdup range_int real recover
+syn keyword    	vBuiltins          malloc byte_calloc float_calloc
+syn keyword    	vBuiltins          isok isnil panic on_panic
 syn keyword    	vConstants         iota true false
 
 hi def link    	vBuiltins          Keyword

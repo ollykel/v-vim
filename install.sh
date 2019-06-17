@@ -5,9 +5,9 @@
 # Usage: install.sh $VIMDIR
 
 if [[ $# -ne 1 ]]; then
-	echo $'\x1b[31minvalid args' >&2
+	echo $'\x1b[31minvalid args'
 	echo $'usage: install.sh $VIMDIR\x1b[0m' >&2
-	return 1
+	exit 1
 fi
 
 VIMDIR=$1
@@ -34,7 +34,7 @@ if [[ -f $VIMDIR/$FNAME ]]; then
 		for LN in $FILE; do
 			OUTPUT+="$LN"
 			OUTPUT+=$'\n'
-			if [[ $(echo "$LN" | grep -c "$SRCH") -ne 0 ]] && [[ $HAS_APPENDED = 'F' ]]; then
+			if [[ $HAS_APPENDED = 'F' ]] && [[ $(echo "$LN" | grep -c "$SRCH") -ne 0 ]]; then
 				OUTPUT+="$ADD"
 				OUTPUT+=$'\n'
 				HAS_APPENDED='T'
@@ -42,8 +42,8 @@ if [[ -f $VIMDIR/$FNAME ]]; then
 		done
 		if [[ $HAS_APPENDED = 'F' ]]; then
 			echo $'\x1b[31m"augroup filetypedetect" not present in '\
-				"$VIMDIR/$FNAME" $'\x1b[0m' >&2
-			return 1
+				"$VIMDIR/$FNAME" $'\x1b[0m'
+			exit 1
 		fi
 		mv $VIMDIR/$FNAME $VIMDIR/$FNAME.old
 		echo "$OUTPUT" > $VIMDIR/$FNAME
@@ -56,5 +56,5 @@ else
 fi
 
 echo $'\x1b[32mPlugin successfully installed in' "$VIMDIR" $'\x1b[0m'
-return 0
+exit 0
 
