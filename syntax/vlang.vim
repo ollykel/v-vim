@@ -49,7 +49,7 @@ syn case match
 
 syn keyword    	vDirective         module import
 syn keyword    	vDeclaration       pub mut const type enum
-syn keyword    	vDeclType          struct $field interface
+syn keyword    	vDeclType          struct interface
 syn region	    vIncluded	display contained start=+"+ skip=+\\\\\|\\"+ end=+"+
 syn match	    vIncluded	display contained "<[^>]*>"
 syn match	    vInclude	display "^\s*\zs\(%:\|#\)\s*include\>\s*["<]" contains=vIncluded
@@ -61,15 +61,19 @@ hi def link     vInclude          Include
 hi def link     vIncluded	      vString
 
 " Keywords within functions
-syn keyword    	vStatement         defer	go	goto return break continue fallthrough
-syn keyword    	vConditional       if $if else switch match or
+syn keyword    	vStatement         defer go goto return break continue fallthrough
+syn keyword    	vConditional       if else switch match or
 syn keyword    	vLabel             case default
 syn keyword    	vRepeat            for in
+syn match       vCodeGen           /$if\>/
+syn match       vCodeGen           /\.fields\>/
+syn match       vCodeGen           /\.$\i*\>/
 
 hi def link    	vStatement         Statement
 hi def link    	vConditional       Conditional
 hi def link    	vLabel             Label
 hi def link    	vRepeat            Repeat
+hi def link     vCodeGen           Identifier
 
 " Predefined types
 syn keyword    	vType              chan map bool string error voidptr
@@ -90,8 +94,11 @@ hi def link    	vComplexes         Type
 syn match      	vDeclaration       /\<fn\>/
 
 " Predefined functions and values
-syn keyword    	vBuiltins          assert cap complex copy delete eprintln imag
-syn keyword    	vBuiltins          make new panic print println real recover
+syn keyword    	vBuiltins          assert C cap complex copy delete exit imag
+syn keyword    	vBuiltins          print println eprint eprintln print_backtrace  
+syn keyword    	vBuiltins          float_calloc ok memdup range_int real recover
+syn keyword    	vBuiltins          malloc byte_calloc float_calloc
+syn keyword    	vBuiltins          isok isnil panic on_panic
 syn keyword    	vConstants         iota true false
 
 hi def link    	vBuiltins          Keyword
