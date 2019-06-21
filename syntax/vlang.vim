@@ -49,7 +49,7 @@ syn case match
 
 syn keyword    	vDirective         module import
 syn keyword    	vDeclaration       pub mut const type enum
-syn keyword    	vDeclType          struct $field interface
+syn keyword    	vDeclType          struct interface
 syn region	    vIncluded	display contained start=+"+ skip=+\\\\\|\\"+ end=+"+
 syn match	    vIncluded	display contained "<[^>]*>"
 syn match	    vInclude	display "^\s*\zs\(%:\|#\)\s*include\>\s*["<]" contains=vIncluded
@@ -61,15 +61,19 @@ hi def link     vInclude          Include
 hi def link     vIncluded	      vString
 
 " Keywords within functions
-syn keyword    	vStatement         defer	go	goto return break continue fallthrough
-syn keyword    	vConditional       if $if else switch match or
+syn keyword    	vStatement         defer go goto return break continue fallthrough
+syn keyword    	vConditional       if else switch match or
 syn keyword    	vLabel             case default
 syn keyword    	vRepeat            for in
+syn match       vCodeGen           /$if\>/
+syn match       vCodeGen           /\.fields\>/
+syn match       vCodeGen           /\.$\i*\>/
 
 hi def link    	vStatement         Statement
 hi def link    	vConditional       Conditional
 hi def link    	vLabel             Label
 hi def link    	vRepeat            Repeat
+hi def link     vCodeGen           Identifier
 
 " Predefined types
 syn keyword    	vType              chan map bool string error voidptr
