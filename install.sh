@@ -14,7 +14,7 @@ VIMDIR=$1
 
 echo "Installing v-vim in $VIMDIR:" >&2
 
-cp ./syntax/vlang.vim $VIMDIR/syntax
+mkdir -p $VIMDIR/syntax && cp ./syntax/vlang.vim $VIMDIR/syntax
 echo $'...\tvlang.vim copied to ' "$VIMDIR/syntax" >&2
 
 FNAME=filetype.vim
