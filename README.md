@@ -34,7 +34,7 @@ cp ./filetype.vim $VIMDIR
 ## Configuration
 You can add any of following into Yours vim config to disable highlighting. All options are enabled by default.
 
-```vi
+```vim
 let g:v_highlight_array_whitespace_error = 0
 let g:v_highlight_chan_whitespace_error = 0
 let g:v_highlight_extra_types = 0
@@ -43,7 +43,6 @@ let g:v_highlight_trailing_whitespace_error = 0
 let g:v_highlight_function_calls = 0
 let g:v_highlight_fields = 0
 ```
-
 
 ## A Note about Verilog
 The language Verilog also uses the file extensions \*.v and \*.vh, which causes
