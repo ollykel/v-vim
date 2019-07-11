@@ -44,6 +44,12 @@ endif
 if !exists('g:v_highlight_trailing_whitespace_error')
   let g:v_highlight_trailing_whitespace_error = 1
 endif
+if !exists('g:v_highlight_function_calls')
+  let g:v_highlight_function_calls = 1
+endif
+if !exists('g:v_highlight_fields')
+  let g:v_highlight_fields = 1
+endif
 
 syn case match
 
@@ -208,6 +214,32 @@ endif
 
 hi def link    	vExtraType         Type
 hi def link    	vSpaceError        Error
+
+" Function calls and Fields are from: https://github.com/fatih/vim-go/blob/master/syntax/go.vim
+" Function calls;
+if v_highlight_function_calls
+  syn match vFunctionCall      /\w\+\ze(/ contains=vBuiltins,vDeclaration
+endif
+hi def link     vFunctionCall      Special
+
+" Fields;
+if v_highlight_fields
+  " 1. Match a sequence of word characters coming after a '.'
+  " 2. Require the following but dont match it: ( \@= see :h E59)
+  "    - The symbols: / - + * %   OR
+  "    - The symbols: [] {} <> )  OR
+  "    - The symbols: \n \r space OR
+  "    - The symbols: , : .
+  " 3. Have the start of highlight (hs) be the start of matched
+  "    pattern (s) offsetted one to the right (+1) (see :h E401)
+  syn match       vField   /\.\w\+\
+        \%(\%([\/\-\+*%]\)\|\
+        \%([\[\]{}<\>\)]\)\|\
+        \%([\!=\^|&]\)\|\
+        \%([\n\r\ ]\)\|\
+        \%([,\:.]\)\)\@=/hs=s+1
+endif
+hi def link    vField              Identifier
 
 " Search backwards for a global declaration to start processing the syntax.
 "syn sync match	vSync grouphere NONE /^\(const\|var\|type\|func\)\>/
