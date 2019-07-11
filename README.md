@@ -3,6 +3,23 @@ The files in this repository provide support for syntax highlighting in Vim.
 They must be installed in your vim runtimepath to work.
 
 ## Instructions
+
+### Using a Plugin Manager
+
+You can install V support with vim plugin manager as usual. For example with [Plug](https://github.com/junegunn/vim-plug):
+
+```vim
+Plug 'ollykel/v-vim'
+
+```
+Reload config (or save & exit vim/neovim). Than:
+```vim
+:PlugInstall
+```
+Enjoy!
+
+### Using install.sh or Manual Installation
+
 These instructions assume that you are using a \*nix-like os.
 
 **\*\*NEW Jun 16, 2019: Use "install.sh $VIMDIR" to install files**
