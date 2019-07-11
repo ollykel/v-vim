@@ -4,7 +4,7 @@ They must be installed in your vim runtimepath to work.
 
 ## Instructions
 
-### Automated install
+### Using a Plugin Manager
 
 You can install V support with vim plugin manager as usual. For example with [Plug](https://github.com/junegunn/vim-plug):
 
@@ -18,7 +18,7 @@ Reload config (or save & exit vim/neovim). Than:
 ```
 Enjoy!
 
-### Manual way
+### Using install.sh or Manual Installation
 
 These instructions assume that you are using a \*nix-like os.
 
