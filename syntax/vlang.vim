@@ -17,7 +17,6 @@
 "   - g:v_highlight_chan_whitespace_error
 "     Highlights white space around the communications operator that don't
 "     follow the standard style.
-"   - g:v_highlight_extra_types
 "     Highlights commonly used library types (io.Reader, etc.).
 "   - g:v_highlight_space_tab_error
 "     Highlights instances of tabs following spaces.
@@ -34,9 +33,6 @@ if !exists('g:v_highlight_array_whitespace_error')
 endif
 if !exists('g:v_highlight_chan_whitespace_error')
   let g:v_highlight_chan_whitespace_error = 1
-endif
-if !exists('g:v_highlight_extra_types')
-  let g:v_highlight_extra_types = 1
 endif
 if !exists('g:v_highlight_space_tab_error')
   let g:v_highlight_space_tab_error = 1
@@ -106,6 +102,7 @@ syn keyword    	vBuiltins          float_calloc ok memdup range_int real recover
 syn keyword    	vBuiltins          malloc byte_calloc float_calloc
 syn keyword    	vBuiltins          isok isnil panic on_panic
 syn keyword    	vConstants         iota true false
+syn match	    vBuiltins          /\<json\.\(encode\|decode\)\>/
 
 hi def link    	vBuiltins          Keyword
 hi def link    	vConstants         Keyword
@@ -197,11 +194,6 @@ if	v_highlight_chan_whitespace_error != 0
   syn match	vSpaceError display "\(\(^\|[={(,;]\)\s*<-\)\@<=\s\+"
 endif
 
-" Extra types commonly seen
-if	v_highlight_extra_types != 0
-  syn match	vExtraType /\<json\.\(encode\|decode\)\>/
-endif
-
 " Space-tab error
 if	v_highlight_space_tab_error != 0
   syn match	vSpaceError display " \+\t"me=e-1
@@ -212,7 +204,6 @@ if	v_highlight_trailing_whitespace_error != 0
   syn match	vSpaceError display excludenl "\s\+$"
 endif
 
-hi def link    	vExtraType         Type
 hi def link    	vSpaceError        Error
 
 " Function calls and Fields are from: https://github.com/fatih/vim-go/blob/master/syntax/go.vim

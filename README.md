@@ -6,7 +6,7 @@ They must be installed in your vim runtimepath to work.
 
 ### Using a Plugin Manager
 
-You can install V support with vim plugin manager as usual. For example with [Plug](https://github.com/junegunn/vim-plug):
+You can install V support with a vim plugin manager as usual, for example with [Plug](https://github.com/junegunn/vim-plug):
 
 ```vim
 Plug 'ollykel/v-vim'
@@ -16,13 +16,15 @@ Reload config (or save & exit vim/neovim). Than:
 ```vim
 :PlugInstall
 ```
-Enjoy!
 
 ### Using install.sh or Manual Installation
 
 These instructions assume that you are using a \*nix-like os.
 
-**\*\*NEW Jun 16, 2019: Use "install.sh $VIMDIR" to install files**
+The provided script install.sh will automate the installation process for you.
+Simply run "./install.sh $VIMDIR", VIMDIR being a directory on your
+runtimepath. Choose VIMDIR using step one of the instructions below.
+
 1. Choose which directory you wish to use.
 If you wish to install these files for personal use only, use the directory
 $HOME/.vim:
@@ -54,7 +56,6 @@ You can add any of following into Yours vim config to disable highlighting. All 
 ```vim
 let g:v_highlight_array_whitespace_error = 0
 let g:v_highlight_chan_whitespace_error = 0
-let g:v_highlight_extra_types = 0
 let g:v_highlight_space_tab_error = 0
 let g:v_highlight_trailing_whitespace_error = 0
 let g:v_highlight_function_calls = 0
