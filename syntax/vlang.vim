@@ -137,7 +137,7 @@ hi def link    	vEscapeError       Error
 
 " Strings and their contents
 syn cluster    	vStringGroup       contains=vEscapeOctal,vEscapeVar,vEscapeC,vEscapeX,vEscapeU,vEscapeBigU,vEscapeError
-syn region     	vString            start=+'+ skip=+\\\\\|\\'+ end=+'+ contains=@vStringGroup
+syn region     	vString            start=+"+ skip=+\\\\\|\\'+ end=+"+ contains=@vStringGroup
 syn region     	vRawString         start=+`+ end=+`+
 
 hi def link    	vString            String
