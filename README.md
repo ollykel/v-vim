@@ -18,7 +18,8 @@ Reload config (or save & exit vim/neovim), then:
 ```
 
 ## Options
-You can add any of following into your vim config to disable highlighting. All options are enabled by default.
+You can add any of the following into your vim config to disable highlighting.  
+All options are enabled by default.
 
 ```vim
 " Disable highlight white space after "[]".
