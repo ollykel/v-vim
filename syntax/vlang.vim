@@ -55,13 +55,17 @@ syn keyword    	vDirective         module import
 syn keyword    	vDeclaration       pub mut const type enum
 syn region	    vIncluded	display contained start=+"+ skip=+\\\\\|\\"+ end=+"+
 syn match	    vIncluded	display contained "<[^>]*>"
+syn match	    vFlagDefinition display contained "\s\i[^\n]*"
 syn match	    vInclude	display "^\s*\zs\(%:\|#\)\s*include\>\s*["<]" contains=vIncluded
+syn match	    vFlag   	display "^\s*\zs\(%:\|#\)\s*flag\>\s*[^\n]*" contains=vFlagDefinition
 
 hi def link    	vDirective         Statement
 hi def link    	vDeclaration       Keyword
 hi def link    	vDeclType          Keyword
 hi def link     vInclude          Include
+hi def link     vFlag             Include
 hi def link     vIncluded	      vString
+hi def link     vFlagDefinition	  vString
 
 " Keywords within functions
 syn keyword    	vStatement         defer go goto return break continue fallthrough
