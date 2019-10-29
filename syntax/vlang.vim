@@ -49,9 +49,10 @@ endif
 
 syn case match
 
+syn match    	vDeclType          "\<\(struct\|interface\)\>"
+
 syn keyword    	vDirective         module import
 syn keyword    	vDeclaration       pub mut const type enum
-syn keyword    	vDeclType          struct interface
 syn region	    vIncluded	display contained start=+"+ skip=+\\\\\|\\"+ end=+"+
 syn match	    vIncluded	display contained "<[^>]*>"
 syn match	    vInclude	display "^\s*\zs\(%:\|#\)\s*include\>\s*["<]" contains=vIncluded
@@ -90,10 +91,11 @@ hi def link    	vUnsignedInts      Type
 hi def link    	vFloats            Type
 hi def link    	vComplexes         Type
 
-" Treat func specially: it's a declaration at the start of a line, but a type
+" Treat fn specially: it's a declaration at the start of a line, but a type
 " elsewhere. Order matters here.
 " syn match      	vType              /\<fn\>/
 syn match      	vDeclaration       /\<fn\>/
+syn match      	vDeclaration       contained /\<fn\>/
 
 " Predefined functions and values
 syn keyword    	vBuiltins          assert C cap complex copy delete exit imag
@@ -178,6 +180,14 @@ syn match      	vImaginary         "\<\.\d\+\([Ee][-+]\d\+\)\?i\>"
 syn match      	vImaginary         "\<\d\+[Ee][-+]\d\+i\>"
 
 hi def link    	vImaginary         Number
+
+" Generics
+syn match     vGenericBrackets     display contained "[<>]"
+syn match     vInterfaceDeclaration  display "\s*\zsinterface\s*\i*\s*<[^>]*>" contains=vDeclType,vGenericBrackets
+syn match     vStructDeclaration  display "\s*\zsstruct\s*\i*\s*<[^>]*>" contains=vDeclType,vGenericBrackets
+syn match     vFuncDeclaration  display "\s*\zsfn\s*\i*\s*<[^>]*>" contains=vDeclaration,vGenericBrackets
+
+hi def link     vGenericBrackets  Identifier
 
 " Spaces after "[]"
 if	v_highlight_array_whitespace_error != 0
