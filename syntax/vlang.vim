@@ -58,6 +58,7 @@ syn match	    vIncluded	display contained "<[^>]*>"
 syn match	    vFlagDefinition display contained "\s\i[^\n]*"
 syn match	    vInclude	display "^\s*\zs\(%:\|#\)\s*include\>\s*["<]" contains=vIncluded
 syn match	    vFlag   	display "^\s*\zs\(%:\|#\)\s*flag\>\s*[^\n]*" contains=vFlagDefinition
+syn region      vShebang    display start=/^#!/ end=/$/
 
 hi def link    	vDirective         Statement
 hi def link    	vDeclaration       Keyword
@@ -66,6 +67,7 @@ hi def link     vInclude          Include
 hi def link     vFlag             Include
 hi def link     vIncluded	      vString
 hi def link     vFlagDefinition	  vString
+hi def link     vShebang          Include
 
 " Keywords within functions
 syn keyword    	vStatement         defer go goto return break continue fallthrough
