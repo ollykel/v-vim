@@ -189,7 +189,8 @@ hi def link    	vImaginary         Number
 syn match     vGenericBrackets     display contained "[<>]"
 syn match     vInterfaceDeclaration  display "\s*\zsinterface\s*\i*\s*<[^>]*>" contains=vDeclType,vGenericBrackets
 syn match     vStructDeclaration  display "\s*\zsstruct\s*\i*\s*<[^>]*>" contains=vDeclType,vGenericBrackets
-syn match     vFuncDeclaration  display "\s*\zsfn\s*\i*\s*<[^>]*>" contains=vDeclaration,vGenericBrackets
+" vFunctionName only appears when v_highlight_function_calls set
+syn match     vFuncDeclaration  display "\s*\zsfn\s*\i*\s*<[^>]*>" contains=vFunctionName,vDeclaration,vGenericBrackets
 
 hi def link     vGenericBrackets  Identifier
 
@@ -223,8 +224,11 @@ hi def link    	vSpaceError        Error
 " Function calls and Fields are from: https://github.com/fatih/vim-go/blob/master/syntax/go.vim
 " Function calls;
 if v_highlight_function_calls
-  syn match vFunctionCall      /\w\+\ze(/ contains=vBuiltins,vDeclaration
+  syn match vFunctionCall      /\w\+\ze\s*(/ contains=vBuiltins,vDeclaration
+  syn match vFunctionName     display contained /\s\w\+/
+  hi def link   vFunctionName      Special
 endif
+
 hi def link     vFunctionCall      Special
 
 " Fields;
