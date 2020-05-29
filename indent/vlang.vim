@@ -13,6 +13,7 @@ setlocal nolisp
 setlocal autoindent
 setlocal indentexpr=VlangIndent(v:lnum)
 setlocal indentkeys+=<:>,0=},0=)
+setlocal noexpandtab
 
 if exists("*VlangIndent")
   finish
