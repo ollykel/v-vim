@@ -156,8 +156,8 @@ syn cluster     vStringGroup        contains=@vCharacterGroup,vStringError
 syn region      vString             start=+"+ skip=+\\\\\|\\'+ end=+"+ contains=@vStringGroup
 syn region      vString             start=+'+ skip=+\\\\\|\\'+ end=+'+ contains=@vStringGroup
 
-syn region      vRawString          start=+r"+ skip=+\\\\\|\\'+ end=+"+
-syn region      vRawString          start=+r'+ skip=+\\\\\|\\'+ end=+'+
+syn region      vRawString          start=+r"+ end=+"+
+syn region      vRawString          start=+r'+ end=+'+
 
 hi def link     vString             String
 hi def link     vRawString          String
