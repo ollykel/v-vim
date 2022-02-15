@@ -71,7 +71,7 @@ hi def link     vFlag               Include
 hi def link     vShebang            Include
 
 " Keywords within functions
-syn keyword     vStatement          defer go goto return break continue
+syn keyword     vStatement          defer go goto return break continue lock rlock shared
 hi def link     vStatement          Statement
 
 syn keyword     vConditional        if else match or select
