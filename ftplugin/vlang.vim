@@ -29,5 +29,7 @@ endfunction
 if has('autocmd')
 	augroup v_fmt
 		autocmd BufWritePre *.v call _VFormatFile()
+		autocmd BufWritePre *.vv call _VFormatFile()
+		autocmd BufWritePre *.vsh call _VFormatFile()
 	augroup END
 endif
